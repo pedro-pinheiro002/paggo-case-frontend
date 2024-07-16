@@ -1,5 +1,9 @@
+import { UploadCard } from "./UploadCard";
+
 export default function Home() {
   return (
-    <h1>Hello</h1>
+    <div className="p-36">
+      <UploadCard />
+    </div>
   );
 }
