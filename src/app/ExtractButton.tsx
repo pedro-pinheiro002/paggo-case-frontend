@@ -23,6 +23,7 @@ export function ExtractButton({
     extractText({ objectKey: fileKey })
       .then((response) => {
         toast.success("Texto extraído com sucesso!");
+        console.log(response);
         importExtractedText({
           objectKey: fileKey,
         })
@@ -35,7 +36,6 @@ export function ExtractButton({
             toast.error("Erro ao importar texto");
             console.error("Error importing text", error);
           });
-        console.log(response);
       })
       .catch((error) => {
         toast.error("Erro ao extrair texto");
