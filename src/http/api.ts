@@ -9,6 +9,7 @@ interface GetUploadUrlRequest {
 interface GetUploadUrlResponse {
   signedUrl: string;
   key: string;
+  name: string;
 }
 
 async function getUploadUrl(
@@ -22,9 +23,16 @@ interface UploadFileRequest {
   file: File;
 }
 
-export async function uploadFile(payload: UploadFileRequest): Promise<string> {
+interface UploadFileResponse {
+  key: string;
+  name: string;
+}
+
+export async function uploadFile(
+  payload: UploadFileRequest
+): Promise<UploadFileResponse> {
   const { file } = payload;
-  const { signedUrl, key } = await getUploadUrl({
+  const { signedUrl, key, name } = await getUploadUrl({
     name: file.name,
     contentType: file.type,
   });
@@ -42,7 +50,7 @@ export async function uploadFile(payload: UploadFileRequest): Promise<string> {
       toast.error("Erro ao fazer upload");
       console.error("Error uploading file", error);
     });
-  return key;
+  return { key, name };
 }
 
 interface ExtractTextRequest {

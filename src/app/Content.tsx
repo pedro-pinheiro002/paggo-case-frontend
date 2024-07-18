@@ -14,7 +14,12 @@ export function Content() {
   return (
     <div className="flex flex-col items-center space-y-6 focus:outline-none">
       <Dropzone onDrop={onDrop} />
-      <ExtractButton fileKey={fileKey} setExtractedText={setExtractedText} />
+      <div className="flex flex-col items-center space-y-4">
+        <div className="text-slate-400">
+          Arquivo upado: {fileName ?? "Nenhum arquivo"}
+        </div>
+        <ExtractButton fileKey={fileKey} setExtractedText={setExtractedText} />
+      </div>
       {extractedText && <TextExtractedTable extractedText={extractedText} />}
     </div>
   );
