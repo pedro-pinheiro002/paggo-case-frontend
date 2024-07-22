@@ -1,5 +1,11 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Toggle } from "@/components/ui/toggle";
+import {
+  Tooltip,
+  TooltipProvider,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
 import { User } from "@/types/types";
 import { LogOut } from "lucide-react";
 
@@ -21,9 +27,16 @@ export function Profile({ user, handleLogOut }: ProfileProps) {
           <p className="text-sm text-slate-500">{user.email}</p>
         </div>
       </div>
-      <Toggle onClick={handleLogOut} size="sm">
-        <LogOut />
-      </Toggle>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Toggle onClick={handleLogOut} size="sm">
+              <LogOut />
+            </Toggle>
+          </TooltipTrigger>
+          <TooltipContent>Log Out</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     </div>
   );
 }
