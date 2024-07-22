@@ -71,3 +71,28 @@ export async function importExtractedText(
   const response = await apiClient.post("/import", payload);
   return response.data;
 }
+
+interface GetTokensResponse {
+  access_token: string;
+  refresh_token: string;
+  expiry_date: number;
+  id_token: string;
+  token_type: string;
+  scope: string;
+}
+
+export async function getTokens(code: string): Promise<GetTokensResponse> {
+  const response = await apiClient.post("/auth/google", { code });
+  return response.data;
+}
+
+interface GetRefreshedTokensResponse extends GetTokensResponse {}
+
+export async function getRefreshedTokens(
+  refreshToken: string
+): Promise<GetRefreshedTokensResponse> {
+  const response = await apiClient.post("/auth/google/refresh-token", {
+    refreshToken,
+  });
+  return response.data;
+}
