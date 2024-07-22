@@ -18,14 +18,14 @@ export function TextExtractedTable({ extractedText }: TextExtractedTableProps) {
     <Table className="bg-slate-900 text-slate-50 rounded-lg">
       <TableHeader>
         {header.map((head) => (
-          <TableHead>{head}</TableHead>
+          <TableHead key={head}>{head}</TableHead>
         ))}
       </TableHeader>
       <TableBody>
         {Object.entries(rows).map(([key, row]) => (
-          <TableRow>
-            {row.map((cell, index) => (
-              <TableCell>{cell}</TableCell>
+          <TableRow key={key}>
+            {row.map((cell) => (
+              <TableCell key={cell}>{cell}</TableCell>
             ))}
           </TableRow>
         ))}
