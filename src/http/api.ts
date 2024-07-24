@@ -36,12 +36,13 @@ export async function uploadFile(
     name: file.name,
     contentType: file.type,
   });
-  apiClient
-    .put(signedUrl, file, {
-      headers: {
-        "Content-Type": file.type,
-      },
-    })
+  fetch(signedUrl, {
+    method: "PUT",
+    body: file,
+    headers: {
+      "Content-Type": file.type,
+    },
+  })
     .then(() => {
       toast.success("Uploado concluído!");
       console.log("File uploaded");
@@ -73,14 +74,15 @@ export async function importExtractedText(
 }
 
 interface GetTokensResponse {
- tokens: {  access_token: string;
-  refresh_token: string;
-  expiry_date: number;
-  id_token: string;
-  token_type: string;
-  scope: string;
- },
- user: User;
+  tokens: {
+    access_token: string;
+    refresh_token: string;
+    expiry_date: number;
+    id_token: string;
+    token_type: string;
+    scope: string;
+  };
+  user: User;
 }
 
 export async function getTokens(code: string): Promise<GetTokensResponse> {
