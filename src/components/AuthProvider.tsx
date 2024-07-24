@@ -1,6 +1,7 @@
 import { removeCookies } from "@/actions/cookies";
 import { getCookies, setCookies } from "@/actions/cookies";
 import { getRefreshedTokens } from "@/http/api";
+import apiClient from "@/http/http-common";
 import { User } from "@/types/types";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
@@ -36,6 +37,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
     }
   }, []);
+  
+  useEffect(() => {
+    apiClient.defaults.headers["Authorization"] = `Bearer ${idToken}`;
+  }, [idToken]);
 
   function handleLogOut() {
     setUser(null);
