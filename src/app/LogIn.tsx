@@ -3,16 +3,14 @@ import { Button } from "@/components/ui/button";
 import { useAuthContext } from "@/hooks/useAuthContext";
 import { getTokens } from "@/http/api";
 import { useGoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
 import Image from "next/image";
 
 export function LogIn() {
   const { handleLogIn } = useAuthContext();
   const onLogin = useGoogleLogin({
     onSuccess: async ({ code }) => {
-      const { id_token } = await getTokens(code);
-      console.log(jwtDecode(id_token));
-      handleLogIn(id_token);
+      const { tokens: {id_token, refresh_token}, user } = await getTokens(code);
+      handleLogIn(id_token, refresh_token, user);
     },
     flow: "auth-code",
   });

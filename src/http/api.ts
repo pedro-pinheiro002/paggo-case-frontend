@@ -1,6 +1,6 @@
 import { toast } from "sonner";
 import apiClient from "./http-common";
-import { ExtractedText } from "@/types/types";
+import { ExtractedText, User } from "@/types/types";
 interface GetUploadUrlRequest {
   name: string;
   contentType: string;
@@ -73,12 +73,14 @@ export async function importExtractedText(
 }
 
 interface GetTokensResponse {
-  access_token: string;
+ tokens: {  access_token: string;
   refresh_token: string;
   expiry_date: number;
   id_token: string;
   token_type: string;
   scope: string;
+ },
+ user: User;
 }
 
 export async function getTokens(code: string): Promise<GetTokensResponse> {
