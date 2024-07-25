@@ -73,6 +73,11 @@ export async function importExtractedText(
   return response.data;
 }
 
+export async function getLastExtractedText(): Promise<ExtractedText> {
+  const response = await apiClient.get("/import/last");
+  return response.data;
+}
+
 interface GetTokensResponse {
   tokens: {
     access_token: string;

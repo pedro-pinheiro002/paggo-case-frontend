@@ -1,6 +1,6 @@
-import { uploadFile } from "@/http/api";
+import { getLastExtractedText, uploadFile } from "@/http/api";
 import { ExtractedText } from "@/types/types";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export function useContent(isAuthenticated: boolean) {
   const [fileKey, setFileKey] = useState<string | null>(null);
@@ -16,5 +16,12 @@ export function useContent(isAuthenticated: boolean) {
     setFileKey(fileKey);
   }, []);
 
+  useEffect(() => {
+    if (!isAuthenticated) return;
+    getLastExtractedText().then((data) => {
+      setExtractedText(data);
+    });
+  }, [isAuthenticated]);
+  
   return { fileKey, fileName, extractedText, onDrop, setExtractedText };
 }
