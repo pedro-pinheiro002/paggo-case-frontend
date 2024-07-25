@@ -2,7 +2,7 @@ import { uploadFile } from "@/http/api";
 import { ExtractedText } from "@/types/types";
 import { useCallback, useState } from "react";
 
-export function useContent() {
+export function useContent(isAuthenticated: boolean) {
   const [fileKey, setFileKey] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
   const [extractedText, setExtractedText] = useState<ExtractedText | null>(

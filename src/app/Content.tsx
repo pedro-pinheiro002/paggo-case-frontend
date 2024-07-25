@@ -7,9 +7,10 @@ import { Profile } from "./Profile";
 import { useAuthContext } from "@/hooks/useAuthContext";
 
 export function Content() {
+  
+  const { user, isAuthenticated, handleLogOut } = useAuthContext();
   const { setExtractedText, extractedText, fileKey, fileName, onDrop } =
-    useContent();
-  const { user, handleLogOut } = useAuthContext();
+    useContent(isAuthenticated);
   if (!user) return <h1>Erro no Log In!</h1>;
 
   return (

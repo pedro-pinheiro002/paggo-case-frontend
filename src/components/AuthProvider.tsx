@@ -9,12 +9,14 @@ import { createContext, useEffect, useState } from "react";
 
 interface AuthContextType {
   user: User | null;
+  isAuthenticated: boolean;
   handleLogIn: (idToken: string, refresh_token: string, user: User) => void;
   handleLogOut: () => void;
 }
 
 export const AuthContext = createContext<AuthContextType>({
   user: null,
+  isAuthenticated: false,
   handleLogIn: (idToken: string) => {},
   handleLogOut: () => {},
 });
@@ -22,6 +24,7 @@ export const AuthContext = createContext<AuthContextType>({
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [idToken, setIdToken] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   useEffect(() => {
     if (!idToken) {
@@ -37,9 +40,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
     }
   }, []);
-  
+
   useEffect(() => {
     apiClient.defaults.headers["Authorization"] = `Bearer ${idToken}`;
+    setIsAuthenticated(!!idToken);
   }, [idToken]);
 
   function handleLogOut() {
@@ -56,7 +60,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     <GoogleOAuthProvider
       clientId={process.env.NEXT_PUBLIC_OAUTH_ACCESS_KEY_ID as string}
     >
-      <AuthContext.Provider value={{ user, handleLogIn, handleLogOut }}>
+      <AuthContext.Provider value={{ user, isAuthenticated, handleLogIn, handleLogOut }}>
         {children}
       </AuthContext.Provider>
     </GoogleOAuthProvider>
