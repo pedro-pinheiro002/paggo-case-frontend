@@ -23,8 +23,7 @@ export function Profile({ user, handleLogOut }: ProfileProps) {
           <AvatarFallback>Profile Pic</AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
-          Olá {user.name}!
-          <p className="text-sm text-slate-500">{user.email}</p>
+          Olá {user.name}!<p className="text-sm text-slate-500">{user.email}</p>
         </div>
       </div>
       <TooltipProvider>

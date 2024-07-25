@@ -9,7 +9,10 @@ export function LogIn() {
   const { handleLogIn } = useAuthContext();
   const onLogin = useGoogleLogin({
     onSuccess: async ({ code }) => {
-      const { tokens: {id_token, refresh_token}, user } = await getTokens(code);
+      const {
+        tokens: { id_token, refresh_token },
+        user,
+      } = await getTokens(code);
       handleLogIn(id_token, refresh_token, user);
     },
     flow: "auth-code",

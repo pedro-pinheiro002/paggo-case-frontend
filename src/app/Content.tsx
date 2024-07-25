@@ -7,7 +7,6 @@ import { Profile } from "./Profile";
 import { useAuthContext } from "@/hooks/useAuthContext";
 
 export function Content() {
-  
   const { user, isAuthenticated, handleLogOut } = useAuthContext();
   const { setExtractedText, extractedText, fileKey, fileName, onDrop } =
     useContent(isAuthenticated);
