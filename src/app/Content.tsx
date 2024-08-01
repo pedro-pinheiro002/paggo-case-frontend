@@ -1,6 +1,6 @@
 "use client";
 import { ExtractButton } from "./ExtractButton";
-import { TextExtractedTable } from "./TextExtractedTable";
+import { TextExtracted } from "./TextExtracted";
 import { Dropzone } from "./Dropzone";
 import { useContent } from "@/hooks/useContent";
 import { Profile } from "./Profile";
@@ -26,7 +26,7 @@ export function Content() {
             setExtractedText={setExtractedText}
           />
         </div>
-        {extractedText && <TextExtractedTable extractedText={extractedText} />}
+        {extractedText && <TextExtracted extractedText={extractedText} />}
       </div>
     </div>
   );

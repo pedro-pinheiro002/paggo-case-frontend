@@ -1,8 +1,4 @@
-export type ExtractedText = {
-  table: {
-    [key: string]: string[];
-  };
-};
+export type ExtractedText = Array<string>;
 
 export type User = {
   id: string;
