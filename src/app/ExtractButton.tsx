@@ -28,14 +28,12 @@ export function ExtractButton({
     extractText({ objectKey: fileKey })
       .then((response) => {
         toast.success("Texto extraído com sucesso!");
-        console.log(response);
         importExtractedText({
           objectKey: fileKey,
         })
           .then((response) => {
             setExtractedText(response);
             setIsLoading(false);
-            console.log(response);
           })
           .catch((error) => {
             toast.error("Erro ao importar texto");
